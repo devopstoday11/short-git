@@ -1,12 +1,12 @@
 {
   "name": "my-project",
   "version": "1.0.0",
-  "scripts": {
-   },
+  "scripts": {},
   "bin": {
-    "gcll": "git_commit.js"
+    "gcll": "git_commit_message.js"
   },
- "dependencies": {
+  "dependencies": {
+    "chalk": "^2.1.0",
     "shelljs": "^0.7.8"
   }
 }
