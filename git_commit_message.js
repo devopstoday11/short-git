@@ -7,5 +7,6 @@ console.log(args);
 if (!args.length) {
   console.log(chalk.red('No commit message provided'));
 } else {
-  console.log(shell.exec(`git add -A . && git commit -a -m '${args[0]}'`));
+  shell.exec(`git add -A . && git commit -a -m '${args[0]}'`);
+  console.log(shell.exec('git status'));
 }
