@@ -1,0 +1,12 @@
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "scripts": {
+   },
+  "bin": {
+    "gc": "git_commit.js"
+  },
+ "dependencies": {
+    "shelljs": "^0.7.8"
+  }
+}
