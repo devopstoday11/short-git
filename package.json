@@ -4,7 +4,7 @@
   "scripts": {
    },
   "bin": {
-    "gc": "git_commit.js"
+    "gcll": "git_commit.js"
   },
  "dependencies": {
     "shelljs": "^0.7.8"
