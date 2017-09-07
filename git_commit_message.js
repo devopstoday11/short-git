@@ -5,8 +5,7 @@ const chalk = require('chalk');
 shell.config.silent = true;
 // get command line argument for commit message
 const args = process.argv.slice(2);
-const commitMessage = args.join(' ') || 'Auto commit';
-console.log({ commitMessage });
+const finalCommitMessage = args.join(' ') || 'Auto commit';
 const getBranchName = branchName => `${chalk.bold.underline('Branch name\t')}: ${chalk.bold.underline(branchName)}`;
 
 const getSpaceDelimitedValue = (string, initIndex) => string.substr(initIndex || 0, string.indexOf(' ') - (initIndex || 0));
@@ -42,7 +41,6 @@ const getFilesMessage = (commitDetails) => {
       const percentIndex = message.indexOf('(100%)');
       const firstFileName = message.substr(7, arrowIndex - 7);
       const secondFileName = message.substr(arrowIndex + 3, percentIndex - arrowIndex - 3);
-      console.log({ arrowIndex, percentIndex, firstFileName, secondFileName });
       filesRenamed += `\n${chalk.yellow(' -', firstFileName, '=>', secondFileName)}`;
     }
   });
@@ -55,7 +53,6 @@ const getFilesMessage = (commitDetails) => {
   if (filesRenamed) {
     filesMessage += `\n${chalk.yellowBright('Files Renamed:')}${filesRenamed}`;
   }
-  console.log({ filesMessage });
   return filesMessage;
 };
 
@@ -83,7 +80,7 @@ if (!args.length) {
 }
 
 // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
-const result = shell.exec(`git add -A . && git commit -a -m '${commitMessage || 'Auto commit'}'`);
+const result = shell.exec(`git add -A . && git commit -a -m '${finalCommitMessage || 'Auto commit'}'`);
 let output = '';
 if (!result.stderr && !result.code) {
   // get the branch name
@@ -94,7 +91,6 @@ if (!result.stderr && !result.code) {
   // starts from \n and have space before every line
   const commitDetails = result.substr(result.indexOf('\n ') + 2).split(/, |\n /);
   const commitDetailLength = commitDetails.length;
-  console.log({ commitDetails, commitDetailLength });
   output = `${output}${getFileChangedMessage(commitDetails)}${getChangesMessage(commitDetails, commitDetailLength)}\n${getFilesMessage(commitDetails.slice(2))}`;
   console.log(output);
 } else {
