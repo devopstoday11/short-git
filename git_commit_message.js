@@ -5,7 +5,7 @@ const chalk = require('chalk');
 shell.config.silent = true;
 const args = process.argv.slice(2);
 
-const getBranchName = branchName => `chalk.bold.underline('Branch name\t')}: ${chalk.bold.underline(branchName)}`;
+const getBranchName = branchName => `${chalk.bold.underline('Branch name\t')}: ${chalk.bold.underline(branchName)}`;
 
 const getSpaceDelimitedValue = (string, initIndex) => string.substr(initIndex || 0, string.indexOf(' ') - (initIndex || 0));
 
