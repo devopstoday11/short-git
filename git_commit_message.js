@@ -15,12 +15,10 @@ const getInsertMessage = commitMessage => `${chalk.green('Insertions\t: ', getSp
 
 const getDeleteMessage = commitMessage => `${chalk.redBright('Deletions\t: ', getSpaceDelimitedValue(commitMessage))}`;
 
-const getInsertAndDeleteMessage = commitDetails => `${getInsertMessage(commitDetails[1])}\n${getDeleteMessage(commitDetails[2])}`;
-
 const getFilesMessage = (commitDetails) => {
   let filesMessage = '';
   let filesAdded = '';
-  const filesRenamed = '';
+  let filesRenamed = '';
   let filesRemoved = '';
   commitDetails.forEach((message) => {
     if (message.indexOf('create') !== -1) {
@@ -30,7 +28,11 @@ const getFilesMessage = (commitDetails) => {
       const splittedMessage = message.split(' ').slice(3).join(' ');
       filesRemoved += `${chalk.redBright(' -', splittedMessage)}`;
     } else if (message.indexOf('rename')) {
-      const b = '';
+      const arrowIndex = message.indexOf('=>');
+      const percentIndex = message.indexOf('(100%)');
+      const firstFileName = message.substr(7, arrowIndex - 7);
+      const secondFileName = message.substr(arrowIndex + 3, percentIndex - arrowIndex - 3);
+      filesRenamed += `${chalk.blueBright(' -', firstFileName, '=>', secondFileName)}`;
     }
   });
   if (filesAdded) {
@@ -38,6 +40,9 @@ const getFilesMessage = (commitDetails) => {
   }
   if (filesRemoved) {
     filesMessage += `${chalk.redBright('Files Removed:')}\n${filesRemoved}`;
+  }
+  if (filesRenamed) {
+    filesMessage += `${chalk.redBright('Files Renamed:')}\n${filesRenamed}`;
   }
   return filesMessage;
 };
