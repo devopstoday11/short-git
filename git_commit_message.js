@@ -5,6 +5,8 @@ const chalk = require('chalk');
 shell.config.silent = true;
 const args = process.argv.slice(2);
 
+const getBranchName = branchName => `chalk.bold.underline('Branch name\t')}: ${chalk.bold.underline(branchName)}`;
+
 const getSpaceDelimitedValue = (string, initIndex) => string.substr(initIndex || 0, string.indexOf(' ') - (initIndex || 0));
 
 const getFileChangedMessage = commitDetails => `${chalk.yellow('Files Changed\t: ', getSpaceDelimitedValue(commitDetails[0]))}`;
@@ -63,7 +65,7 @@ if (!args.length) {
     // get the branch name
     const branchName = getSpaceDelimitedValue(result, 1);
     // attach branch name to output
-    output = `${output}${chalk.bold.underline('Branch name\t')}: ${chalk.bold.underline(branchName)}\n`;
+    output = `${output}${getBranchName(branchName)}\n`;
     // commitDetails includes additions, deletions, file added, file removed, renamed etc.
     // starts from \n and have space before every line
     const commitDetails = result.substr(result.indexOf('\n ') + 2).split(/, |\n /);
@@ -74,7 +76,7 @@ if (!args.length) {
   } else {
     // nothing to commit
     if (result.indexOf('nothing to commit')) {
-      output = `${output}${chalk.bold.underline('Branch name\t: ', result.substr(10, result.indexOf('\n') - 10))}\n`;
+      output = `${output}${getBranchName(result.substr(10, result.indexOf('\n') - 10))}\n`;
       output = `${output}${chalk.redBright('Nothing to commit')}`;
       console.log(output);
     }
