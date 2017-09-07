@@ -23,11 +23,11 @@ if (!args.length) {
         console.log(chalk`${output}`);
         break;
       case 2:
-        output = `${output}${chalk.bold('Files Changed')}${chalk.bold(commitDetails[0].sunstr(0, commitDetails[0].indexOf(' ')))}`;
+        output = `${output}Files Changed\t:${chalk.bold(commitDetails[0].substr(0, commitDetails[0].indexOf(' ')))}`;
         console.log(chalk`${output}`);
         break;
       case 3:
-        output = `${output}${chalk.bold('Files Changed')}${chalk.bold(commitDetails[0].sunstr(0, commitDetails[0].indexOf(' ')))}`;
+        output = `${output}Files Changed\t:${chalk.bold(commitDetails[0].substr(0, commitDetails[0].indexOf(' ')))}`;
         console.log(chalk`${output}`);
         break;
       default:
