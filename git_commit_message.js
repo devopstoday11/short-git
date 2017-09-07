@@ -6,7 +6,7 @@ shell.config.silent = true;
 // get command line argument for commit message
 const args = process.argv.slice(2);
 const commitMessage = args.join(' ') || 'Auto commit';
-
+console.log({ commitMessage });
 const getBranchName = branchName => `${chalk.bold.underline('Branch name\t')}: ${chalk.bold.underline(branchName)}`;
 
 const getSpaceDelimitedValue = (string, initIndex) => string.substr(initIndex || 0, string.indexOf(' ') - (initIndex || 0));
