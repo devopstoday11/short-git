@@ -53,7 +53,7 @@ const getFilesMessage = (commitDetails) => {
   if (filesRenamed) {
     filesMessage += `\n${chalk.yellowBright('Files Renamed:')}${filesRenamed}`;
   }
-  return filesMessage;
+  return `\n${filesMessage}`;
 };
 
 /**
@@ -91,7 +91,7 @@ if (!result.stderr && !result.code) {
   // starts from \n and have space before every line
   const commitDetails = result.substr(result.indexOf('\n ') + 2).split(/, |\n /);
   const commitDetailLength = commitDetails.length;
-  output = `${output}${getFileChangedMessage(commitDetails)}${getChangesMessage(commitDetails, commitDetailLength)}\n${getFilesMessage(commitDetails.slice(2))}`;
+  output = `${output}${getFileChangedMessage(commitDetails)}${getChangesMessage(commitDetails, commitDetailLength)}${getFilesMessage(commitDetails.slice(2))}`;
   console.log(output);
 } else {
   // nothing to commit
