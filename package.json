@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {},
   "bin": {
-    "gcll": "git_commit_message.js"
+    "gac": "git_commit_message.js"
   },
   "dependencies": {
     "chalk": "^2.1.0",

@@ -23,27 +23,30 @@ const getFilesMessage = (commitDetails) => {
   commitDetails.forEach((message) => {
     if (message.indexOf('create') !== -1) {
       const splittedMessage = message.split(' ').slice(3).join(' ');
-      filesAdded += `${chalk.green(' -', splittedMessage)}`;
+      filesAdded += `\n${chalk.green(' -', splittedMessage)}`;
     } else if (message.indexOf('delete') !== -1) {
       const splittedMessage = message.split(' ').slice(3).join(' ');
-      filesRemoved += `${chalk.redBright(' -', splittedMessage)}`;
-    } else if (message.indexOf('rename')) {
+      filesRemoved += `\n${chalk.red(' -', splittedMessage)}`;
+    } else if (message.indexOf('rename') !== -1) {
+      console.log({ message });
       const arrowIndex = message.indexOf('=>');
       const percentIndex = message.indexOf('(100%)');
       const firstFileName = message.substr(7, arrowIndex - 7);
       const secondFileName = message.substr(arrowIndex + 3, percentIndex - arrowIndex - 3);
-      filesRenamed += `${chalk.blueBright(' -', firstFileName, '=>', secondFileName)}`;
+      console.log({ arrowIndex, percentIndex, firstFileName, secondFileName });
+      filesRenamed += `\n${chalk.yellow(' -', firstFileName, '=>', secondFileName)}`;
     }
   });
   if (filesAdded) {
-    filesMessage += `${chalk.green('Files Added:')}\n${filesAdded}`;
+    filesMessage += `\n${chalk.greenBright('Files Added:')}${filesAdded}`;
   }
   if (filesRemoved) {
-    filesMessage += `${chalk.redBright('Files Removed:')}\n${filesRemoved}`;
+    filesMessage += `\n${chalk.redBright('Files Removed:')}${filesRemoved}`;
   }
   if (filesRenamed) {
-    filesMessage += `${chalk.redBright('Files Renamed:')}\n${filesRenamed}`;
+    filesMessage += `\n${chalk.yellowBright('Files Renamed:')}${filesRenamed}`;
   }
+  console.log({ filesMessage });
   return filesMessage;
 };
 
@@ -61,30 +64,29 @@ const getChangesMessage = (commitDetails) => {
 };
 
 if (!args.length) {
-  console.log(chalk.redBright('No commit message provided'));
+  console.log(chalk.redBright('No commit message provided. Using default message'));
+}
+// exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
+const result = shell.exec(`git add -A . && git commit -a -m '${args[0] || 'Auto commit'}'`);
+let output = '';
+if (!result.stderr && !result.code) {
+  // get the branch name
+  const branchName = getSpaceDelimitedValue(result, 1);
+  // attach branch name to output
+  output = `${output}${getBranchName(branchName)}\n`;
+  // commitDetails includes additions, deletions, file added, file removed, renamed etc.
+  // starts from \n and have space before every line
+  const commitDetails = result.substr(result.indexOf('\n ') + 2).split(/, |\n /);
+  const commitDetailLength = commitDetails.length;
+  console.log({ commitDetails, commitDetailLength });
+  output = `${output}${getFileChangedMessage(commitDetails)}${getChangesMessage(commitDetails, commitDetailLength)}\n${getFilesMessage(commitDetails.slice(2))}`;
+  console.log(output);
 } else {
-  // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
-  const result = shell.exec(`git add -A . && git commit -a -m '${args[0]}'`);
-  let output = '';
-  if (!result.stderr && !result.code) {
-    // get the branch name
-    const branchName = getSpaceDelimitedValue(result, 1);
-    // attach branch name to output
-    output = `${output}${getBranchName(branchName)}\n`;
-    // commitDetails includes additions, deletions, file added, file removed, renamed etc.
-    // starts from \n and have space before every line
-    const commitDetails = result.substr(result.indexOf('\n ') + 2).split(/, |\n /);
-    const commitDetailLength = commitDetails.length;
-    console.log({ commitDetails, commitDetailLength });
-    output = `${output}${getFileChangedMessage(commitDetails)}${getChangesMessage(commitDetails, commitDetailLength)}\n${getFilesMessage(commitDetails.slice(2))}`;
+  // nothing to commit
+  if (result.indexOf('nothing to commit')) {
+    output = `${output}${getBranchName(result.substr(10, result.indexOf('\n') - 10))}\n`;
+    output = `${output}${chalk.redBright('Nothing to commit')}`;
     console.log(output);
-  } else {
-    // nothing to commit
-    if (result.indexOf('nothing to commit')) {
-      output = `${output}${getBranchName(result.substr(10, result.indexOf('\n') - 10))}\n`;
-      output = `${output}${chalk.redBright('Nothing to commit')}`;
-      console.log(output);
-    }
-    console.log(chalk.redBright(result.stderr));
   }
+  console.log(chalk.redBright(result.stderr));
 }
