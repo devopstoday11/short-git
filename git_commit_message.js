@@ -1,9 +1,11 @@
 #! /usr/bin/env node
 const shell = require('shelljs');
 const chalk = require('chalk');
-
+// SET SILENT TRUE SO THAT DEFAULT OUTPUT IS NOT PRINTED ON CONSOLE
 shell.config.silent = true;
+// get command line argument for commit message
 const args = process.argv.slice(2);
+const commitMessage = args.join(' ') || 'Auto commit';
 
 const getBranchName = branchName => `${chalk.bold.underline('Branch name\t')}: ${chalk.bold.underline(branchName)}`;
 
@@ -15,6 +17,11 @@ const getInsertMessage = commitMessage => `${chalk.green('Insertions\t: ', getSp
 
 const getDeleteMessage = commitMessage => `${chalk.redBright('Deletions\t: ', getSpaceDelimitedValue(commitMessage))}`;
 
+/**
+ * Generate message for created, deleted and renamed files
+ * param {Array} [commitDetails] array of commit messages from index 2 to end.
+ * @returns {String} created, deleted and renamed files message formatted string.
+ */
 const getFilesMessage = (commitDetails) => {
   let filesMessage = '';
   let filesAdded = '';
@@ -22,13 +29,15 @@ const getFilesMessage = (commitDetails) => {
   let filesRemoved = '';
   commitDetails.forEach((message) => {
     if (message.indexOf('create') !== -1) {
+      // get file name
+      // exa. delete mode 100644 mmm.js
       const splittedMessage = message.split(' ').slice(3).join(' ');
       filesAdded += `\n${chalk.green(' -', splittedMessage)}`;
     } else if (message.indexOf('delete') !== -1) {
       const splittedMessage = message.split(' ').slice(3).join(' ');
       filesRemoved += `\n${chalk.red(' -', splittedMessage)}`;
     } else if (message.indexOf('rename') !== -1) {
-      console.log({ message });
+      // exam. rename ddd.js => ddd_isdas.js (100%)\n
       const arrowIndex = message.indexOf('=>');
       const percentIndex = message.indexOf('(100%)');
       const firstFileName = message.substr(7, arrowIndex - 7);
@@ -50,6 +59,11 @@ const getFilesMessage = (commitDetails) => {
   return filesMessage;
 };
 
+/**
+ * Generate message for number of insertion and deletions
+ * param {Array} [commitDetails] array of commit messages.
+ * @returns {String} insertion and deletion message formatted string.
+ */
 const getChangesMessage = (commitDetails) => {
   let output = '';
   const changeDetails = commitDetails.slice(1, 3);
@@ -63,11 +77,13 @@ const getChangesMessage = (commitDetails) => {
   return output;
 };
 
+// If no arguments
 if (!args.length) {
   console.log(chalk.redBright('No commit message provided. Using default message'));
 }
+
 // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
-const result = shell.exec(`git add -A . && git commit -a -m '${args[0] || 'Auto commit'}'`);
+const result = shell.exec(`git add -A . && git commit -a -m '${commitMessage || 'Auto commit'}'`);
 let output = '';
 if (!result.stderr && !result.code) {
   // get the branch name
