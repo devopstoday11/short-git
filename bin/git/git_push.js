@@ -27,6 +27,7 @@ module.exports = (branchName, args, callback) => {
       console.log(2);
       const commitLine = stderr.substr(stderr.indexOf('..') + 2);
       console.log({ commitLine });
+      console.log(branchName);
       console.log(stderr.indexOf(branchName) - 2);
       const commitLine1 = commitLine.substr(0, stderr.indexOf(branchName) - 2);
       console.log({ commitLine1 });
