@@ -82,7 +82,7 @@ const getChangesMessage = (commitDetails) => {
 
 // If no arguments
 if (!args.length) {
-  console.log(chalk.redBright('No commit message provided. Using default message'));
+  console.log(chalk.redBright('No commit message provided. Using default message \'Auto commit\'));
 }
 
 // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
