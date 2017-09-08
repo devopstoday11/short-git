@@ -7,15 +7,15 @@ const getCurrentBranch = require('./helpers/get_current_branch');
 // get command line argument for commit message
 const args = process.argv.slice(2);
 const argsString = args.join(' ');
-console.log(1);
+console.log(11);
 shell.exec(`gac ${argsString}`, (codeGAC, stdoutGAC, stderrGAC) => {
   console.log({ codeGAC, stdoutGAC, stderrGAC });
-  console.log(2);
+  console.log(22);
   if (stderrGAC) {
     shell.echo(chalk.redBright(stderrGAC));
     shell.exit(1);
   } else {
-    console.log(3);
+    console.log(33);
     shell.exec('gps', (codeGPS, stdoutGPS, stderrGPS) => {
       console.log(44);
       if (stderrGPS) {
