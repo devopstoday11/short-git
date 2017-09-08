@@ -15,6 +15,7 @@ shell.exec(`gac ${argsString}`, (codeGAC, stdoutGAC, stderrGAC) => {
     shell.exit(1);
   } else {
     shell.exec('gps', (codeGPS, stdoutGPS, stderrGPS) => {
+      console.log(1);
       if (stderrGPS) {
         shell.echo(chalk.redBright(stderrGPS));
         shell.exit(1);
