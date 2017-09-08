@@ -8,6 +8,7 @@ const gitCommit = require('./git/git_commit');
 // get command line argument for commit message
 const args = process.argv.slice(2);
 const argsString = args.join(' ');
+
 console.log(gitCommit(argsString));
 // shell.exec(`gac ${argsString}`, (codeGAC, stdoutGAC, stderrGAC) => {
 //   console.log({ codeGAC, stdoutGAC, stderrGAC });
