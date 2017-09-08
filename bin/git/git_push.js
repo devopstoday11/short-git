@@ -22,6 +22,7 @@ module.exports = (branchName, args, callback) => {
       return;
   }
   shell.exec(command, (code, stdout, stderr) => {
+    console.log({ code, stdout, stderr });
     if (stderr) {
       // get hash
       // example:
