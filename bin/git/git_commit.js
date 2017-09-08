@@ -101,5 +101,5 @@ module.exports = (message) => {
     output = `${output}${chalk.redBright('Nothing to commit')}`;
     return output;
   }
-  return 'chalk.redBright(result.stderr)';
+  return `${chalk.redBright(result.stderr)}`;
 };

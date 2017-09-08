@@ -6,9 +6,8 @@ const getCurrentBranch = require('./helpers/get_current_branch');
 shell.config.silent = true;
 // get command line argument for commit message
 const args = process.argv.slice(2);
-let branchName = getCurrentBranch(shell);
+const branchName = getCurrentBranch(shell);
 // remove \n from the end
-branchName = branchName.substr(0, branchName.length - 1);
 
 let command = 'git push';
 switch (args.length) {
