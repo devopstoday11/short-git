@@ -29,7 +29,9 @@ module.exports = (branchName, args, callback) => {
       //   9ae2336..9835655  ft/push -> ft/push
       let commitHash = stderr.substr(stderr.indexOf('..') + 2);
       commitHash = commitHash.substr(0, commitHash.indexOf('  '));
+      // get git url
       let url = stderr.substr(3, stderr.indexOf('\n') - 7);
+      // Generate final url
       url = `${url}/commit/${commitHash}`;
       callback(`${chalk.greenBright('Push Successfull')}\nLink : ${url}`);
       return;
