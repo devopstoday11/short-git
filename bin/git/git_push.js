@@ -30,7 +30,7 @@ module.exports = (branchName, args, callback) => {
         callback(output);
         return;
       }
-      if (stderr.indexOf('rejected' !== -1)) {
+      if (stderr.indexOf('rejected') !== -1) {
         output = `${output}\n${chalk.redBright('Updates were rejected because the remote contains work that you do not have locally. This is usually caused by another repository pushing to the same ref. You may want to first integrate the remote changes (e.g., \'git pull ...\') before pushing again.')}`;
         callback(output);
         return;
