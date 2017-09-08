@@ -25,7 +25,7 @@ module.exports = (branchName, args, callback) => {
     if (stderr) {
       let output = `${chalk.red('Push failed')}`;
       if (code === 128) {
-        output = `${output}\nUnable to reach git host\nPlease check your internet connection`;
+        output = `${output}\n${chalk.redBright('Unable to reach git host\nPlease check your internet connection')}`;
         callback(output);
         return;
       }
