@@ -25,6 +25,8 @@ module.exports = (branchName, args, callback) => {
     // console.log(121, { code, stdout, stderr });
     if (stderr) {
       console.log(2);
+      const commitLine = stderr.substr(stderr.indexOf('\n   '));
+      console.log(commitLine);
       callback(chalk.redBright(stderr));
       return;
     }
