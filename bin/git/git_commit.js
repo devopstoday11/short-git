@@ -76,7 +76,7 @@ const getChangesMessage = (commitDetails) => {
 // If no arguments
 
 
-module.exports = (message) => {
+module.exports = (message, callback) => {
   // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
   const result = shell.exec(`git add -A . && git commit -a -m '${finalCommitMessage || 'Auto commit'}'`);
   let output = '';
@@ -93,13 +93,13 @@ module.exports = (message) => {
     const commitDetails = result.substr(result.indexOf('\n ') + 2).split(/, |\n /);
     const commitDetailLength = commitDetails.length;
     output = `${output}${getFileChangedMessage(commitDetails)}${getChangesMessage(commitDetails, commitDetailLength)}${getFilesMessage(commitDetails.slice(2))}`;
-    return output;
+    callback(output);
   }
   // nothing to commit
   if (result.indexOf('nothing to commit')) {
     output = `${output}${getBranchName(result.substr(10, result.indexOf('\n') - 10))}\n`;
     output = `${output}${chalk.redBright('Nothing to commit')}`;
-    return output;
+    callback(output);
   }
-  return `${chalk.redBright(result.stderr)}`;
+  callback(chalk.redBright(result.stderr));
 };

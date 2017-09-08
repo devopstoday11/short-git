@@ -4,7 +4,7 @@ const chalk = require('chalk');
 // SET SILENT TRUE SO THAT DEFAULT OUTPUT IS NOT PRINTED ON CONSOLE
 shell.config.silent = true;
 // get command line argument for commit message
-module.exports = (branchName, args) => {
+module.exports = (branchName, args, callback) => {
   // remove \n from the end
   let command = 'git push';
   switch (args.length) {
@@ -18,13 +18,13 @@ module.exports = (branchName, args) => {
       command += ` ${args[0]} ${args[1]}`;
       break;
     default:
-      return chalk.redBright('Invalid arguments');
+      callback(chalk.redBright('Invalid arguments'));
   }
   shell.exec(command, (code, stdout, stderr) => {
     console.log({ code, stdout, stderr });
     if (stderr) {
-      return chalk.redBright(stderr);
+      callback(chalk.redBright(stderr));
     }
-    return chalk.greenBright(stdout);
+    callback(chalk.greenBright(stdout));
   });
 };
