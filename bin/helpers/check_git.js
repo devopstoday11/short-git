@@ -1,7 +1,7 @@
 const shell = require('shelljs');
 const chalk = require('chalk');
 
-module.expoerts = () => {
+module.exports = () => {
   console.log(1);
   console.log(shell.which('sdasdas'));
   if (!shell.which('sdasdas')) {
