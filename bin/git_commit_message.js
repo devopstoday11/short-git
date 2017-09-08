@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const checkGit = require('./helpers/check_git');
 
 if (!checkGit) {
+  console.log(13);
   shell.exit(1);
 }
 // SET SILENT TRUE SO THAT DEFAULT OUTPUT IS NOT PRINTED ON CONSOLE
