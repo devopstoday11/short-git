@@ -10,6 +10,7 @@ const branchName = getCurrentBranch(shell);
 
 gitCommit(argsString, (commitMessage) => {
   console.log(commitMessage);
+  console.log('Pushing your changes ...');
   gitPush(branchName, [], (pushMessage) => {
     console.log(pushMessage);
   });
