@@ -16,20 +16,3 @@ gitCommit(argsString, (commitMessage) => {
     console.log(pushMessage);
   });
 });
-// shell.exec(`gac ${argsString}`, (codeGAC, stdoutGAC, stderrGAC) => {
-//   console.log({ codeGAC, stdoutGAC, stderrGAC });
-//   console.log(22);
-//   if (stderrGAC) {
-//     shell.echo(chalk.redBright(stderrGAC));
-//     shell.exit(1);
-//   } else {
-//     console.log(33);
-//     shell.exec('gps', (codeGPS, stdoutGPS, stderrGPS) => {
-//       console.log(44);
-//       if (stderrGPS) {
-//         shell.echo(chalk.redBright(stderrGPS));
-//         shell.exit(1);
-//       }
-//     });
-//   }
-// });

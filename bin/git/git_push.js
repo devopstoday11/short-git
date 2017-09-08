@@ -24,10 +24,11 @@ module.exports = (branchName, args, callback) => {
   shell.exec(command, (code, stdout, stderr) => {
     // console.log(121, { code, stdout, stderr });
     if (stderr) {
-      let commitLine = stderr.substr(stderr.indexOf('..') + 2);
-      commitLine = commitLine.substr(0, commitLine.indexOf('  '));
-      console.log(commitLine);
-      callback(chalk.redBright(stderr));
+      let commitHash = stderr.substr(stderr.indexOf('..') + 2);
+      commitHash = commitHash.substr(0, commitHash.indexOf('  '));
+      let url = stderr.substr(3, stderr.indexOf('\n') - 7);
+      url = `${url}/commit/${commitHash}`;
+      callback(`${chalk.greenBright('Push Successfull')}\nLink :${chalk.underline(url)}`);
       return;
     }
     callback(chalk.greenBright(stdout));
