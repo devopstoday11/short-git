@@ -25,7 +25,7 @@ module.exports = (branchName, args, callback) => {
     console.log({ code, stdout, stderr });
     if (stderr) {
       if (stderr.indexOf('rejected' !== -1)) {
-        callback(chalk.redBright('Updates were rejected because the remote contains work that you do\nhint: not have locally. This is usually caused by another repository pushing\nhint: to the same ref. You may want to first integrate the remote changes\nhint: (e.g., \'git pull ...\') before pushing again.'));
+        callback(chalk.redBright('(Updates were rejected because the remote contains work that you do\nhint: not have locally. This is usually caused by another repository pushing\nhint: to the same ref. You may want to first integrate the remote changes\nhint: (e.g., \'git pull ...\') before pushing again.').replace('hint:'));
         return;
       }
       // get hash
