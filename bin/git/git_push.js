@@ -5,6 +5,7 @@ const chalk = require('chalk');
 shell.config.silent = true;
 // get command line argument for commit message
 module.exports = (branchName, args, callback) => {
+  console.log('-----------------------------------');
   // remove \n from the end
   let command = 'git push';
   switch (args.length) {
@@ -21,7 +22,7 @@ module.exports = (branchName, args, callback) => {
       callback(chalk.redBright('Invalid arguments'));
   }
   shell.exec(command, (code, stdout, stderr) => {
-    console.log({ code, stdout, stderr });
+    console.log(121, { code, stdout, stderr });
     if (stderr) {
       callback(chalk.redBright(stderr));
     }
