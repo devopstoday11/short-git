@@ -81,7 +81,7 @@ module.exports = (message) => {
   const result = shell.exec(`git add -A . && git commit -a -m '${finalCommitMessage || 'Auto commit'}'`);
   let output = '';
   if (!message) {
-    output += `${chalk.redBright('No commit message provided. Using default message \'Auto commit\'')}`;
+    output += `${chalk.redBright('No commit message provided. Using default message \'Auto commit\'')}\n`;
   }
   if (!result.stderr && !result.code) {
     // get the branch name
