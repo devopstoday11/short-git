@@ -22,7 +22,6 @@ module.exports = (branchName, args, callback) => {
       return;
   }
   shell.exec(command, (code, stdout, stderr) => {
-    // console.log(121, { code, stdout, stderr });
     if (stderr) {
       let commitHash = stderr.substr(stderr.indexOf('..') + 2);
       commitHash = commitHash.substr(0, commitHash.indexOf('  '));
