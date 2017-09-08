@@ -23,11 +23,15 @@ module.exports = (branchName, args, callback) => {
   }
   shell.exec(command, (code, stdout, stderr) => {
     if (stderr) {
+      // get hash
+      // example:
+      // To https://github.com/ridhamtarpara/short-git.git
+      //   9ae2336..9835655  ft/push -> ft/push
       let commitHash = stderr.substr(stderr.indexOf('..') + 2);
       commitHash = commitHash.substr(0, commitHash.indexOf('  '));
       let url = stderr.substr(3, stderr.indexOf('\n') - 7);
       url = `${url}/commit/${commitHash}`;
-      callback(`${chalk.greenBright('Push Successfull')}\nLink :${chalk.underline(url)}`);
+      callback(`${chalk.greenBright('Push Successfull')}\nLink : ${url}`);
       return;
     }
     callback(chalk.greenBright(stdout));
