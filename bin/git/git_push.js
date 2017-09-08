@@ -24,6 +24,7 @@ module.exports = (branchName, args, callback) => {
   shell.exec(command, (code, stdout, stderr) => {
     // console.log(121, { code, stdout, stderr });
     if (stderr) {
+      console.log(2);
       callback(chalk.redBright(stderr));
       return;
     }
