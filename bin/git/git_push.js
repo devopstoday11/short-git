@@ -26,7 +26,7 @@ module.exports = (branchName, args, callback) => {
     if (stderr) {
       if (stderr.indexOf('rejected' !== -1)) {
         let output = 'Updates were rejected because the remote contains work that you do\nhint: not have locally. This is usually caused by another repository pushing\nhint: to the same ref. You may want to first integrate the remote changes\nhint: (e.g., \'git pull ...\') before pushing again.';
-        output = output.replace(/\\nhint:/g, '');
+        output = output.replace(/hint/g, '');
         console.log({ output });
         callback(chalk.redBright(output));
         return;
