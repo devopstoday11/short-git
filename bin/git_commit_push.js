@@ -11,12 +11,10 @@ console.log('================================');
 const args = process.argv.slice(2);
 const argsString = args.join(' ');
 const branchName = getCurrentBranch(shell);
-console.log(12);
 gitCommit(argsString, (commitMessage) => {
-  console.log(commitMessage);
-  console.log('+++++++++++++++++++++++++++++++');
+  console.log(111);
   gitPush(branchName, args, (pushMessage) => {
-    console.log(pushMessage);
+    console.log(222);
   });
 });
 // shell.exec(`gac ${argsString}`, (codeGAC, stdoutGAC, stderrGAC) => {
