@@ -6,6 +6,8 @@ const checkGit = require('./helpers/check_git');
 if (!checkGit) {
   console.log(13);
   shell.exit(1);
+} else {
+  console.log(14);
 }
 // SET SILENT TRUE SO THAT DEFAULT OUTPUT IS NOT PRINTED ON CONSOLE
 shell.config.silent = true;
