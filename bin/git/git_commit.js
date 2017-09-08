@@ -78,7 +78,6 @@ const getChangesMessage = (commitDetails) => {
 
 module.exports = (message, callback) => {
   // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
-  console.log(222);
   const result = shell.exec(`git add -A . && git commit -a -m '${finalCommitMessage || 'Auto commit'}'`);
   let output = '';
   if (!message) {

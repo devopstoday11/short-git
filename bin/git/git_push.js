@@ -19,11 +19,13 @@ module.exports = (branchName, args, callback) => {
       break;
     default:
       callback(chalk.redBright('Invalid arguments'));
+      return;
   }
   shell.exec(command, (code, stdout, stderr) => {
     // console.log(121, { code, stdout, stderr });
     if (stderr) {
       callback(chalk.redBright(stderr));
+      return;
     }
     callback(chalk.greenBright(stdout));
   });
