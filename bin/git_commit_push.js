@@ -13,6 +13,7 @@ const branchName = getCurrentBranch(shell);
 
 gitCommit(argsString, (commitMessage) => {
   console.log(commitMessage);
+  console.log('+++++++++++++++++++++++++++++++');
   gitPush(branchName, args, (pushMessage) => {
     console.log(pushMessage);
   });
