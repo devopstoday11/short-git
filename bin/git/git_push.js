@@ -22,7 +22,6 @@ module.exports = (branchName, args, callback) => {
       return;
   }
   shell.exec(command, (code, stdout, stderr) => {
-    console.log({ code, stdout, stderr });
     if (stderr) {
       if (stderr.indexOf('rejected' !== -1)) {
         const output = 'Updates were rejected because the remote contains work that you do not have locally. This is usually caused by another repository pushing to the same ref. You may want to first integrate the remote changes (e.g., \'git pull ...\') before pushing again.';
