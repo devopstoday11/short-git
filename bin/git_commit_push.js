@@ -10,7 +10,7 @@ const gitPush = require('./git/git_push');
 const args = process.argv.slice(2);
 const argsString = args.join(' ');
 const branchName = getCurrentBranch(shell);
-
+console.log(12);
 gitCommit(argsString, (commitMessage) => {
   console.log(commitMessage);
   console.log('+++++++++++++++++++++++++++++++');

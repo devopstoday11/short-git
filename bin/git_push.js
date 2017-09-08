@@ -25,9 +25,8 @@ switch (args.length) {
     shell.exit(1);
 }
 
-console.log({ command });
 shell.exec(command, (code, stdout, stderr) => {
-  console.log({ code, stdout, stderr });
+  console.log(121, { code, stdout, stderr });
   if (stderr) {
     shell.echo(chalk.redBright(stderr));
     shell.exit(1);
