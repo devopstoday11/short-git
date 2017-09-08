@@ -1,6 +1,19 @@
 {
-  "name": "my-project",
+  "name": "short-git",
   "version": "1.0.0",
+  "description": "Use git with short codes and formatted output",
+  "license": "MIT",
+  "repository": "ridhamtarpara/short-git",
+  "engines": {
+		"node": ">=4"
+	},
+  "keywords": [
+    "git",
+    "short-git",
+    "formatted",
+    "short",
+    "short-command"
+  ],
   "scripts": {},
   "bin": {
     "gac": "bin/git_commit_message.js"
