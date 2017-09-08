@@ -95,12 +95,14 @@ module.exports = (message, callback) => {
     const commitDetailLength = commitDetails.length;
     output = `${output}${getFileChangedMessage(commitDetails)}${getChangesMessage(commitDetails, commitDetailLength)}${getFilesMessage(commitDetails.slice(2))}`;
     callback(output);
+    return;
   }
   // nothing to commit
   if (result.indexOf('nothing to commit')) {
     output = `${output}${getBranchName(result.substr(10, result.indexOf('\n') - 10))}\n`;
     output = `${output}${chalk.redBright('Nothing to commit')}`;
     callback(output);
+    return;
   }
   callback(chalk.redBright(result.stderr));
 };
