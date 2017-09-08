@@ -7,6 +7,7 @@ const gitPush = require('./git/git_push');
 // SET SILENT TRUE SO THAT DEFAULT OUTPUT IS NOT PRINTED ON CONSOLE
 // shell.config.silent = true;
 // get command line argument for commit message
+console.log('================================');
 const args = process.argv.slice(2);
 const argsString = args.join(' ');
 const branchName = getCurrentBranch(shell);
