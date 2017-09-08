@@ -25,12 +25,13 @@ module.exports = (branchName, args, callback) => {
     if (stderr) {
       let output = `${chalk.red('Push failed')}`;
       if (code === 128) {
-        callback(`${output}\nUnable to reach git host\nPlease check your internet connection`);
+        output = `${output}\nUnable to reach git host\nPlease check your internet connection`;
+        callback();
         return;
       }
       if (stderr.indexOf('rejected' !== -1)) {
-        output += 'Updates were rejected because the remote contains work that you do not have locally. This is usually caused by another repository pushing to the same ref. You may want to first integrate the remote changes (e.g., \'git pull ...\') before pushing again.';
-        callback(`${output}\n${chalk.redBright(output)}`);
+        output = `${output}\n${chalk.redBright('Updates were rejected because the remote contains work that you do not have locally. This is usually caused by another repository pushing to the same ref. You may want to first integrate the remote changes (e.g., \'git pull ...\') before pushing again.')}`;
+        callback(output);
         return;
       }
       // get hash
