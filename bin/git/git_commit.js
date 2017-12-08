@@ -78,7 +78,8 @@ const getChangesMessage = (commitDetails) => {
 
 module.exports = (message, callback) => {
   // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
-  const result = shell.exec(`git add -A . && git commit -a -m '${finalCommitMessage || 'Auto commit'}'`);
+  const result = shell.exec(`git add -A . && git commit -m "${finalCommitMessage || 'Auto commit'}"`);
+  console.log({result});
   let output = '';
   if (!message) {
     output += `${chalk.redBright('No commit message provided. Using default message \'Auto commit\'')}\n`;
