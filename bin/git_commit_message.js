@@ -84,7 +84,6 @@ const getChangesMessage = (commitDetails) => {
 if (!args.length) {
   shell.echo(chalk.redBright('No commit message provided. Using default message \'Auto commit\''));
 }
-
 // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
 const result = shell.exec(`git add -A . && git commit -a -m '${finalCommitMessage || 'Auto commit'}'`);
 let output = '';

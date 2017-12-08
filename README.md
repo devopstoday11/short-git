@@ -12,6 +12,11 @@ npm install short-git -g
 
 
 ### Usage Example
+#### gacp
 `gacp` - will add, commit and push your code with message "Auto Commit"\
 `gacp 'ch: moved push function to lib folder'` - will add, commit and push your code with message "ch: moved push function to lib folder"\
 `gacp ch: moved push function to lib folder` - will add, commit and push your code with message "ch: moved push function to lib folder"
+```
+output:
+
+```
