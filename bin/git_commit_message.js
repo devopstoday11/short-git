@@ -1,8 +1,14 @@
 #! /usr/bin/env node
 const shell = require('shelljs');
 const chalk = require('chalk');
+const checkGit = require('./helpers/check_git');
+
+if (!checkGit()) {
+  shell.exit(1);
+}
 // SET SILENT TRUE SO THAT DEFAULT OUTPUT IS NOT PRINTED ON CONSOLE
 shell.config.silent = true;
+
 // get command line argument for commit message
 const args = process.argv.slice(2);
 const finalCommitMessage = args.join(' ') || 'Auto commit';
@@ -76,7 +82,7 @@ const getChangesMessage = (commitDetails) => {
 
 // If no arguments
 if (!args.length) {
-  console.log(chalk.redBright('No commit message provided. Using default message'));
+  shell.echo(chalk.redBright('No commit message provided. Using default message \'Auto commit\''));
 }
 
 // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
@@ -92,13 +98,15 @@ if (!result.stderr && !result.code) {
   const commitDetails = result.substr(result.indexOf('\n ') + 2).split(/, |\n /);
   const commitDetailLength = commitDetails.length;
   output = `${output}${getFileChangedMessage(commitDetails)}${getChangesMessage(commitDetails, commitDetailLength)}${getFilesMessage(commitDetails.slice(2))}`;
-  console.log(output);
+  shell.echo(output);
+  shell.exit(1);
 } else {
   // nothing to commit
   if (result.indexOf('nothing to commit')) {
     output = `${output}${getBranchName(result.substr(10, result.indexOf('\n') - 10))}\n`;
     output = `${output}${chalk.redBright('Nothing to commit')}`;
-    console.log(output);
+    shell.echo(output);
+    shell.exit(1);
   }
-  console.log(chalk.redBright(result.stderr));
+  shell.echo(chalk.redBright(result.stderr));
 }

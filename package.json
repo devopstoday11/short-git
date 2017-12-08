@@ -1,9 +1,28 @@
 {
-  "name": "my-project",
-  "version": "1.0.0",
+  "name": "short-git",
+  "version": "1.0.1",
+  "description": "Use git with easy-to-use short codes and formatted output",
+  "license": "MIT",
+  "author": "Ridham Tarpara <ridham.tarpara@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ridhamtarpara/short-git.git"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "git",
+    "short-git",
+    "formatted",
+    "short",
+    "short-command"
+  ],
   "scripts": {},
   "bin": {
-    "gac": "git_commit_message.js"
+    "gac": "bin/git_commit_message.js",
+    "gps": "bin/git_push.js",
+    "gacp": "bin/git_commit_push.js"
   },
   "dependencies": {
     "chalk": "^2.1.0",
@@ -12,5 +31,10 @@
   "devDependencies": {
     "eslint": "^4.6.1",
     "eslint-config-airbnb": "^15.1.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/ridhamtarpara/short-git/issues"
+  },
+  "homepage": "https://github.com/ridhamtarpara/short-git#readme",
+  "main": "index.js"
 }
