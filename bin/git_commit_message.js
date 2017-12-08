@@ -34,7 +34,6 @@ const getFilesMessage = (commitDetails) => {
   let filesRemoved = '';
   commitDetails.forEach((message) => {
     if (message.indexOf('create') !== -1) {
-      // get file name
       // exa. delete mode 100644 mmm.js
       const splittedMessage = message.split(' ').slice(3).join(' ');
       filesAdded += `\n${chalk.green(' -', splittedMessage)}`;
@@ -84,6 +83,7 @@ const getChangesMessage = (commitDetails) => {
 if (!args.length) {
   shell.echo(chalk.redBright('No commit message provided. Using default message \'Auto commit\''));
 }
+
 // exa. [ft/commit d525baa] color changed\n 1 file changed, 1 insertion(+)\n
 const result = shell.exec(`git add -A . && git commit -a -m '${finalCommitMessage || 'Auto commit'}'`);
 let output = '';
