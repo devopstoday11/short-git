@@ -1,3 +1,6 @@
+import { loadavg } from 'os';
+import { log } from 'shelljs/src/common';
+
 #! /usr/bin/env node
 const shell = require('shelljs');
 const chalk = require('chalk');
@@ -106,6 +109,7 @@ if (!result.stderr && !result.code) {
     output = `${output}${chalk.redBright('Nothing to commit')}`;
     shell.echo(output);
     shell.exit(1);
+    console.log('1212');
   }
   shell.echo(chalk.redBright(result.stderr));
 }
