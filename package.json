@@ -20,8 +20,6 @@
   ],
   "scripts": {},
   "bin": {
-    "gac": "bin/git_commit_message.js",
-    "gps": "bin/git_only_push.js",
     "gacp": "bin/git_commit_push.js"
   },
   "dependencies": {
