@@ -1,6 +1,6 @@
 {
   "name": "short-git",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Use git with easy-to-use short codes and formatted output",
   "license": "MIT",
   "author": "Ridham Tarpara <ridham.tarpara@gmail.com>",
